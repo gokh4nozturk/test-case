@@ -1,0 +1,68 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import Button from './Button.vue';
+
+export const Template = ({ content, ...rest }) => {
+  const args = rest;
+  return {
+    components: { Button },
+    setup() {
+      return {
+        args,
+        content,
+      };
+    },
+    template: `
+    <Button v-bind="args">
+      <template v-slot:default>
+        <span>{{ content }}</span>
+      </template>
+    </Button>`,
+  };
+};
+
+export const defaultArgs = {
+  variant: {
+    control: {
+      type: 'select',
+      options: ['primary', 'secondary', 'icon-only', 'text', 'outline'],
+    },
+    defaultValue: 'primary',
+    table: {
+      defaultValue: {
+        summary: 'primary',
+        detail: 'primary | secondary | icon-only | text | outline',
+      },
+    },
+    description: 'Variants of button',
+  },
+};
+
+<Meta
+  title="Components/Button"
+  component={Button}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+### Overview
+
+<Canvas withSource="open">
+  <Story
+    name="Overview"
+    argTypes={{ ...Template.argTypes }}
+    args={{
+      variant: 'primary',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+<ArgsTable
+  story="Overview"
+  exclude={/^(click|content|default|custom-icon|on.*)$/}
+/>
