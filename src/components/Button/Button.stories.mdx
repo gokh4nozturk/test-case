@@ -1,7 +1,7 @@
 import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
 import Button from './Button.vue';
 
-export const Template = ({ content, ...rest }) => {
+export const WithSlots = ({ content, ...rest }) => {
   const args = rest;
   return {
     components: { Button },
@@ -35,6 +35,86 @@ export const defaultArgs = {
     },
     description: 'Variants of button',
   },
+  size: {
+    control: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+    },
+    defaultValue: 'medium',
+    table: {
+      defaultValue: {
+        summary: 'medium',
+        detail: 'small | medium | large',
+      },
+    },
+    description: 'Size of button',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+    description: 'Disabled state of button',
+  },
+  loading: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+    table: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+    description: 'Loading state of button',
+  },
+  icon: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+    table: {
+      defaultValue: {
+        summary: '',
+      },
+    },
+    description: 'Icon of button',
+  },
+  iconPosition: {
+    control: {
+      type: 'select',
+      options: ['left', 'right'],
+    },
+    defaultValue: 'left',
+    table: {
+      defaultValue: {
+        summary: 'left',
+        detail: 'left | right',
+      },
+    },
+    description: 'Icon position of button',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Button',
+    table: {
+      defaultValue: {
+        summary: 'Button',
+      },
+    },
+    description: 'Label of button',
+  },
+  onClick: {
+    action: 'click',
+    description: 'Click event of button',
+  },
 };
 
 <Meta
@@ -51,13 +131,13 @@ export const defaultArgs = {
 <Canvas withSource="open">
   <Story
     name="Overview"
-    argTypes={{ ...Template.argTypes }}
+    argTypes={{ ...WithSlots.argTypes }}
     args={{
       variant: 'primary',
       content: 'Button',
     }}
   >
-    {Template.bind({})}
+    {WithSlots.bind({})}
   </Story>
 </Canvas>
 
@@ -65,5 +145,5 @@ export const defaultArgs = {
 
 <ArgsTable
   story="Overview"
-  exclude={/^(click|content|default|custom-icon|on.*)$/}
+  exclude={/^(click|content|label|default|custom-icon|on.*)$/}
 />
