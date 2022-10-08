@@ -1,0 +1,102 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+
+import Icon from './Icon.vue';
+
+export const Default = (args) => {
+  return {
+    components: { Icon },
+    setup() {
+      return { args };
+    },
+    template: `<Icon v-bind="args" />`,
+  };
+};
+
+export const defaultArgs = {
+  name: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'face',
+  },
+  size: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '24',
+  },
+  color: {
+    control: {
+      type: 'color',
+    },
+    defaultValue: '',
+  },
+  kind: {
+    control: {
+      type: 'radio',
+      options: ['filled', 'round', 'outlined', 'sharp', 'two-tone'],
+    },
+    defaultValue: 'filled',
+    table: {
+      defaultValue: {
+        summary: 'filled',
+        detail: 'filled | round | outlined | sharp | two-tone',
+      },
+    },
+    description: 'Kinds of icon',
+  },
+  fontWeight: {
+    control: {
+      type: 'radio',
+      options: ['light', 'bold'],
+    },
+    defaultValue: 'light',
+  },
+};
+
+<Meta
+  title="Components/Icon"
+  component={Icon}
+  argTypes={{ ...defaultArgs }}
+  parameters={{
+    viewMode: 'docs',
+  }}
+/>
+
+# Icon
+
+Icon is a component that displays an icon. It is a wrapper for the [Material Design Icons](https://materialdesignicons.com/).
+
+<Canvas withSource="open">
+  <Story
+    name="Overview"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      name: 'face',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
+
+### Playground
+
+> Changes you make in the controls will be reflected in the example above.
+
+<ArgsTable story="Overview" />
+
+## Stories
+
+### Default
+
+<Canvas withSource="open">
+  <Story
+    name="Default"
+    argTypes={{ ...Default.argTypes }}
+    args={{
+      name: 'face',
+    }}
+  >
+    {Default.bind({})}
+  </Story>
+</Canvas>
