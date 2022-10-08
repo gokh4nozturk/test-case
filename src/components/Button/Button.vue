@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 export interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'tertiary';
-  size: 'small' | 'medium' | 'large';
-  disabled: boolean;
-  loading: boolean;
-  icon: string;
-  iconPosition: 'left' | 'right';
-  label: string;
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  loading?: boolean;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  label?: string;
 }
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'primary',
@@ -18,6 +18,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconPosition: 'left',
   label: '',
 });
+
+defineEmits(['click']);
 
 const classes = computed(() => {
   return {
@@ -30,7 +32,12 @@ const classes = computed(() => {
 });
 </script>
 <template>
-  <button class="button" :class="classes" :disabled="disabled">
+  <button
+    class="button"
+    :class="classes"
+    :disabled="disabled"
+    @click="$emit('click')"
+  >
     <slot />
   </button>
 </template>
